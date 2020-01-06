@@ -48,11 +48,14 @@ public class Main extends PApplet {
     public void mouseClicked(){
         updateActorPrio();
         newGeneration();
-        System.out.println("Average for that run was: " + average + " and it should have been " + scoreSum/newActors.size());
+        System.out.println("Average for that run was: " + average + " and it should have been " + scoreSum/actors.size());
         average = 0;
         scoreSum = 0;
-        actors = newActors;
-System.out.println("Mouse CLICKED");
+        Actor[] intermediaryActors = (Actor[]) newActors.toArray();
+        actors.clear();
+        Collections.addAll(actors, intermediaryActors);
+        newActors.clear();
+        System.out.println("Mouse CLICKED");
 System.out.println(actors.size());
     }
 
@@ -82,7 +85,7 @@ System.out.println(actors.size());
                 System.out.println(actors.size());
                 System.out.println("score was more than average");
             }
-            if (actor.score < average) {
+            if (actor.score <= average) {
                 newActors.remove(actor);
                 System.out.println("score was less than average");
             }
