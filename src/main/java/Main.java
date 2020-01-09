@@ -4,23 +4,19 @@ import java.util.*;
 
 public class Main extends PApplet {
     PApplet p = this;
-    private static Item item;
     public static String[] names = new String[]{"kort", "kompas", "vand", "sandwich", "sukker", "dåsemad", "banan", "æble", "ost", "øl", "solcreme", "kamera", "T-shirt", "bukser", "paraply", "vandtætte bukser", "vandtæt overtøj", "pung", "solbriller", "håndklæde", "sokker", "bog", "notesbog", "telt"};
     public static String[] weights = new String[]{"90", "130", "1530", "500", "150", "680", "270", "390", "230", "520", "110", "320", "240", "480", "730", "420", "430", "220", "70", "180", "40", "300", "900", "2000"};
     public static Integer[] prices = new Integer[]{150, 35, 200, 160, 60, 45, 60, 40, 30, 10, 70, 30, 15, 10, 40, 70, 75, 80, 20, 12, 50, 10, 1, 150};
     public static float[] startPrio = new float[]{50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50};
-    ArrayList<Item> items = new ArrayList<Item>();
     public ArrayList<Actor> actors = new ArrayList<Actor>();
-    double average = 0;
-    double scoreSum = 0;
-    public ArrayList<Actor> newActors;
+    int amountOfActors = 200;
+    int iterations = 1;
+    ArrayList<ArrayList<Integer>> matingPool = new ArrayList<>();
+    int n = 0;
+
 
     public void settings() {
-        makeData(names, weights, prices);
-        for(int i = 0; i < 20; i++){
-            createActors();
-        }
-        System.out.println("actors created");
+        createActors();
     }
 
     @Override
@@ -28,72 +24,70 @@ public class Main extends PApplet {
         p.background(255);
     }
 
-    public void mouseClicked(){
-        updateActorPrio();
-        newGeneration();
-        System.out.println("Average for that run was: " + average + " and it should have been " + scoreSum/actors.size());
-        average = 0;
-        scoreSum = 0;
-        actors.clear();
-        actors.addAll(newActors);
-        newActors.clear();
-System.out.println(actors.size());
+    public void mouseClicked() {
+        for (int i = 0; i < iterations; i++) {
+            int average = 0;
+            for (Actor actor : actors) {
+                System.out.println(actor.test() + "With the items:" + actor.backpack.toString());
+                average = average + actor.test();
+            }
+            System.out.println("The average for this generation was " + average / amountOfActors);
+            setMatingPool();
+            newGeneration();
+        }
     }
 
     public static void main(String[] args) {
         Main.main("Main");
     }
 
-
-    private void makeData(String[] names, String[] weights, Integer[] prices) {
-        for (int i = 0; i < names.length; i++) {
-            items.add(i, new Item(names[i], Integer.parseInt(weights[i]), prices[i]));
-        }
-        System.out.println("items added");
-    }
-    private void newGeneration(){
-        newActors = new ArrayList<Actor>(actors);
-        for(int i = 0; i < actors.size(); i++){
-            average = average + ((actors.get(i).score)/actors.size());
-            scoreSum = scoreSum + actors.get(i).score;
-        }
-        for(int i = 0; i < actors.size();i++){
-            Actor actor = actors.get(i);
-            System.out.println(average);
-            System.out.println(actor.score);
-            System.out.println(Arrays.toString(actor.itemPrio));
-            if(actor.score > average){
-                newActors.add(actor);
-                System.out.println(actors.size());
-                System.out.println("score was more than average");
-            }
-            if (actor.score <= average) {
-                newActors.remove(actor);
-                System.out.println("score was less than average");
-            }
-        }
-    }
     private void createActors() {
-        actors.add(new Actor(startPrio, names));
-        System.out.println("Actor created");
-    }
-
-    private void updateActorPrio() {
-        for (Actor actor : actors) {
-            for (int i = 0; i < actor.prio.length; i++) {
-                actor.prio[i] = random( 0.95f, 1.05f) * actor.prio[i];
-            }
-            Comparator<Priority> priorityWeightComparator = Comparator.comparingInt(Priority::getWeight);
-            Arrays.sort(actor.prioList, priorityWeightComparator);
-                //final List<String> stringListCopy = Arrays.asList(names);
-                //ArrayList sortedList = new ArrayList(stringListCopy);
-                //sortedList.sort(Comparator.comparing(s -> actor.prio[stringListCopy.indexOf(s)]));
-                //for (int i = 0; i < sortedList.size(); i++){
-                //    actor.itemPrio[i] = (String) sortedList.get(i);
-                //}
-                //actor.itemPrio = sortedList.toArray(new String[0]);
-                actor.test();
+        for(int i = 0; i < amountOfActors; i++) {
+            actors.add(new Actor(startPrio, names));
         }
+        System.out.println("Actors created");
+    }
+    // Start with an empty mating pool.
+    public void setMatingPool(){
+        matingPool.clear();
+        for (Actor actor : actors) {
+            n =+ actor.score;
+            for (int j = 0; j < actor.score; j++) {
+                matingPool.add(new ArrayList<Integer>(actor.prioList));
+            }
+        }
+    }
+    public void newGeneration(){
+        for(Actor actor : actors){
+            actor.prioList = mergeDNA1();
+        }
+    }
+    public ArrayList<Integer> mergeDNA1(){
+        ArrayList<Integer> source1 = new ArrayList<Integer>(matingPool.get(parseInt(random(0,n))));
+        ArrayList<Integer> source2 = new ArrayList<Integer>(matingPool.get(parseInt(random(0,n))));
+        ArrayList<Integer> source3 = new ArrayList<>();
+        for(int i = 0; i < names.length; i++){
+            if(i%2==0) {
+                source3.add(source1.get(0));
+                source2.remove(source1.get(0));
+                source1.remove(source1.get(0));
+            }
+            if(i%2==1) {
+                source3.add(source2.get(0));
+                source1.remove(source2.get(0));
+                source2.remove(source2.get(0));
+            }
+        }
+        for(int i = 0; i < source3.size(); i++){
+            if(random(0,1) >= 0.95){
+                int iValue = source3.get(i);
+                int target = parseInt(random(0,source3.size()+1)-1);
+                int temp = source3.get(target);
+                source3.set(target, iValue);
+                source3.set(i, temp);
+            }
+        }
+        return source3;
     }
 }
 
