@@ -10,33 +10,16 @@ public class Main extends PApplet {
     public static Integer[] prices = new Integer[]{150, 35, 200, 160, 60, 45, 60, 40, 30, 10, 70, 30, 15, 10, 40, 70, 75, 80, 20, 12, 50, 10, 1, 150};
     public static float[] startPrio = new float[]{50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50};
     ArrayList<Item> items = new ArrayList<Item>();
-    ArrayList<Actor> actors = new ArrayList<Actor>();
+    public ArrayList<Actor> actors = new ArrayList<Actor>();
     double average = 0;
     double scoreSum = 0;
-    private ArrayList<Actor> newActors;
+    public ArrayList<Actor> newActors;
 
     public void settings() {
         makeData(names, weights, prices);
-        createActors();
-        createActors();
-        createActors();
-        createActors();
-        createActors();
-        createActors();
-        createActors();
-        createActors();        createActors();
-        createActors();
-        createActors();
-        createActors();        createActors();
-        createActors();
-        createActors();
-        createActors();        createActors();
-        createActors();
-        createActors();
-        createActors();        createActors();
-        createActors();
-        createActors();
-        createActors();
+        for(int i = 0; i < 20; i++){
+            createActors();
+        }
         System.out.println("actors created");
     }
 
@@ -51,11 +34,9 @@ public class Main extends PApplet {
         System.out.println("Average for that run was: " + average + " and it should have been " + scoreSum/actors.size());
         average = 0;
         scoreSum = 0;
-        Actor[] intermediaryActors = (Actor[]) newActors.toArray();
         actors.clear();
-        Collections.addAll(actors, intermediaryActors);
+        actors.addAll(newActors);
         newActors.clear();
-        System.out.println("Mouse CLICKED");
 System.out.println(actors.size());
     }
 
@@ -80,6 +61,7 @@ System.out.println(actors.size());
             Actor actor = actors.get(i);
             System.out.println(average);
             System.out.println(actor.score);
+            System.out.println(Arrays.toString(actor.itemPrio));
             if(actor.score > average){
                 newActors.add(actor);
                 System.out.println(actors.size());
@@ -99,13 +81,30 @@ System.out.println(actors.size());
     private void updateActorPrio() {
         for (Actor actor : actors) {
             for (int i = 0; i < actor.prio.length; i++) {
-                actor.prio[i] = random(parseFloat((int) 0.95), parseFloat((int) 1.05)) * actor.prio[i];
+                actor.prio[i] = random( 0.95f, 1.05f) * actor.prio[i];
             }
-                final List<String> stringListCopy = Arrays.asList(names);
-                ArrayList<String> sortedList = new ArrayList(stringListCopy);
-                Collections.sort(sortedList, Comparator.comparing(s -> actor.prio[stringListCopy.indexOf(s)]));
-                actor.itemPrio = sortedList.toArray(new String[0]);
+            Comparator<Priority> priorityWeightComparator = Comparator.comparingInt(Priority::getWeight);
+            Arrays.sort(actor.prioList, priorityWeightComparator);
+                //final List<String> stringListCopy = Arrays.asList(names);
+                //ArrayList sortedList = new ArrayList(stringListCopy);
+                //sortedList.sort(Comparator.comparing(s -> actor.prio[stringListCopy.indexOf(s)]));
+                //for (int i = 0; i < sortedList.size(); i++){
+                //    actor.itemPrio[i] = (String) sortedList.get(i);
+                //}
+                //actor.itemPrio = sortedList.toArray(new String[0]);
                 actor.test();
         }
     }
 }
+
+/* Planning List:
+Create actors from either random or set values, priorities will be represented by a row of items it will want to get first
+Then the fitness will be determined, and the chances of the actor reproducing will depend on the fitness
+Then each actor will be paired with a weighted random partner an amount of times relative to the initial actor's fitness
+The priority list for the new actor will be made by either;
+taking each of the parents favorite items alternating,
+randomising for each spot in the row which of the parents' genes will be taken for that slot by index,
+or randomising which parent's gene will be the next one in the sequence.
+Then each of the priorities in the row will be iterated over and given a 1-2% of mutatation(moving to a random spot in the row).
+Lastly the actor's fitness is evaluated and cycle repeats.
+ */

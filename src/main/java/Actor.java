@@ -1,8 +1,18 @@
+import java.util.ArrayList;
+
 public class Actor {
     float[] prio;
     String[] itemPrio;
+    //ArrayList<Priority> prioList = new ArrayList<>();
+    Priority[] prioList = new Priority[50];
     int score;
     Actor(float[] priority, String[] items){
+        for(int i = 0; i < priority.length; i++){
+            //prioList.set(i, new Priority(priority[i], items[i]));
+            prioList[i] = new Priority(priority[i], items[i]);
+            prioList[i].item = items[i];
+            prioList[i].weight = priority[i];
+        }
         prio = priority;
         itemPrio = items;
         score = 0;

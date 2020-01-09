@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="197a868a-cb57-4275-a9f7-87a680b1d4b1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Priority.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Actor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Actor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Actor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +87,9 @@
       <workItem from="1576569290448" duration="85000" />
       <workItem from="1576569382644" duration="5479000" />
       <workItem from="1576753999413" duration="7595000" />
-      <workItem from="1578301915440" duration="3095000" />
+      <workItem from="1578301915440" duration="3349000" />
+      <workItem from="1578382432959" duration="9734000" />
+      <workItem from="1578563062646" duration="2402000" />
     </task>
     <servers />
   </component>
@@ -96,7 +101,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
