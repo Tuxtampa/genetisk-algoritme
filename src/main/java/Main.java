@@ -17,7 +17,7 @@ Lastly the actor's fitness is evaluated and cycle repeats.
 The High, Low and Avg points for each generation are stored and then displayed when drawGraphs() is called.
 UI is very barebones, but it will have to do for now. Red dots represent the highest score of the generation, green the lowest, and blue the average.
 A mutation rate of 2% seemed pretty good, a nice chance of mutation while still having a very low possibility that it will all go to shit.
-500 actors seemed to be pretty efficient, plus it looks really nice with the graph. :)
+200 actors seemed to be pretty efficient, plus it looks really nice with the graph. :)
 I tried to do something with score to the power of 1.5 for the reproduction rates,
 but then the program would run out of memory when doing more than just a hundred actors, so i stopped that.
 The program apparently uses some features of the preview version of java 13 so i hope that doesn't cause any problems.
@@ -32,7 +32,7 @@ public class Main extends PApplet {
     public ArrayList<Integer> highPoints = new ArrayList<>();
     public ArrayList<Integer> lowPoints = new ArrayList<>();
     public ArrayList<Integer> avgPoints = new ArrayList<>();
-    int amountOfActors = 500;
+    int amountOfActors = 200;
     int iterations = 1;
     float mutationRate = 0.02f;
     ArrayList<ArrayList<Integer>> matingPool = new ArrayList<>();
@@ -56,9 +56,9 @@ public class Main extends PApplet {
         p.background(255);
         p.frameRate(60);
         drawGraph();
-        p.text("The items the best actor this generation brought were "+ Arrays.toString(generationBackpack),10,800);
-        p.text("The items the best actor overall brought were "+ Arrays.toString(highScoreBackpack),10,820);
-        if(totalHighScore > maxScore-1)p.text("THE MAX SCORE HAS BEEN REACHED AT RUN " + highScoreRunCount,10,840);
+        p.text("The items the best actor this generation brought were "+ Arrays.toString(generationBackpack),10,720);
+        p.text("The items the best actor overall brought were "+ Arrays.toString(highScoreBackpack),10,740);
+        if(totalHighScore > maxScore-1)p.text("THE MAX SCORE HAS BEEN REACHED AT RUN " + highScoreRunCount,10,760);
     }
 
     public void mouseClicked() {
