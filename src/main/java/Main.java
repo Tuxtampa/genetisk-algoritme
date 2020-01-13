@@ -20,6 +20,7 @@ A mutation rate of 2% seemed pretty good, a nice chance of mutation while still 
 500 actors seemed to be pretty efficient, plus it looks really nice with the graph. :)
 I tried to do something with score to the power of 1.5 for the reproduction rates,
 but then the program would run out of memory when doing more than just a hundred actors, so i stopped that.
+The program apparently uses some features of the preview version of java 13 so i hope that doesn't cause any problems.
  */
 
 public class Main extends PApplet {
