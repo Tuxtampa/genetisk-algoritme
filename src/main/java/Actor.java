@@ -2,20 +2,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Actor {
-    float[] prio;
-    String[] itemPrio;
     ArrayList<Integer> prioList = new ArrayList<>();
     int score;
     ArrayList<String> backpack = new ArrayList<>();
-    Actor(float[] priority, String[] items){
+
+    Actor(){
         for(int i = 0; i < Main.names.length; i++){
             prioList.add(i, i);
         }
         Collections.shuffle(prioList);
-        prio = priority;
-        itemPrio = items;
         score = 0;
     }
+
 
     int test() {
         int result = 0;
