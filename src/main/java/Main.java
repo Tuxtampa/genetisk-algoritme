@@ -67,7 +67,6 @@ public class Main extends PApplet {
             int highScore = 0;
             int lowScore = 1500;
             for (Actor actor : actors) {
-                System.out.println(actor.test() + "With the items:" + actor.backpack.toString());
                 int score = actor.test();
                 average = average + score;
                 if(score > highScore){
@@ -86,19 +85,12 @@ public class Main extends PApplet {
             average = average / amountOfActors;
             avgPoints.add(average);
             highPoints.add(highScore);
-            System.out.println("The average for this generation was " + average);
-            System.out.println("The highscore for this generation was " + highScore);
-            System.out.println("The highscore overall is " + totalHighScore);
-            System.out.println("The items the best actor this generation brought were "+ Arrays.toString(generationBackpack));
-            System.out.println("The items the best actor overall brought were "+ Arrays.toString(highScoreBackpack));
             if(totalHighScore == 1130){
-                System.out.println("THE MAX SCORE HAS BEEN REACHED AT RUN " + highScoreRunCount);
             }
             setMatingPool();
             newGeneration();
             drawGraph();
         }
-        p.text("The items the best actor this generation brought were "+ Arrays.toString(generationBackpack),10,800);
     }
 
     public static void main(String[] args) {
