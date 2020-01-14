@@ -21,6 +21,11 @@ A mutation rate of 2% seemed pretty good, a nice chance of mutation while still 
 I tried to do something with score to the power of 1.5 for the reproduction rates,
 but then the program would run out of memory when doing more than just a hundred actors, so i stopped that.
 The program apparently uses some features of the preview version of java 13 so i hope that doesn't cause any problems.
+(update 2, after turning in)
+I changed the reproduction rates to square the scores again, and this time i simply divided that by 10000
+This means the actors improve faster, while the program is still able to run.
+I also experimented with a very low mutation rate, and while it means that there isnt a perfect solution as often,
+the average scores for each generation are cosiderably higher.
  */
 
 public class Main extends PApplet {
@@ -32,9 +37,9 @@ public class Main extends PApplet {
     public ArrayList<Integer> highPoints = new ArrayList<>();
     public ArrayList<Integer> lowPoints = new ArrayList<>();
     public ArrayList<Integer> avgPoints = new ArrayList<>();
-    int amountOfActors = 200;
+    int amountOfActors = 2000;
     int iterations = 1;
-    float mutationRate = 0.02f;
+    float mutationRate = 0.00005f;
     ArrayList<ArrayList<Integer>> matingPool = new ArrayList<>();
     int n = 0;
     int totalHighScore = 0;
@@ -107,7 +112,7 @@ public class Main extends PApplet {
         matingPool.clear();
         n = 0;
         for (Actor actor : actors) {
-            int abomination = actor.score;
+            int abomination = actor.score*actor.score/10000;
             n = n + abomination;
             for (int j = 0; j < abomination; j++) {
                 matingPool.add(new ArrayList<>(actor.prioList));

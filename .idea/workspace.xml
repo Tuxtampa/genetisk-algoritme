@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,6 +119,7 @@
       <workItem from="1578858830749" duration="1795000" />
       <workItem from="1578860640217" duration="12773000" />
       <workItem from="1578889524781" duration="139000" />
+      <workItem from="1578988926103" duration="6197000" />
     </task>
     <servers />
   </component>
