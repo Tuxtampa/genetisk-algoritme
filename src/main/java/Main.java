@@ -39,8 +39,10 @@ public class Main extends PApplet {
     public ArrayList<Integer> avgPoints = new ArrayList<>();
     int amountOfActors = 2000;
     int iterations = 1;
-    float mutationRate = 0.00005f;
-    ArrayList<ArrayList<Integer>> matingPool = new ArrayList<>();
+    float mutationRate = 0.005f;
+    ArrayList<Integer> matingPool = new ArrayList<>();
+    ArrayList<ArrayList<Integer>> refPool = new ArrayList();
+
     int n = 0;
     int totalHighScore = 0;
     int maxScore = 1130;
@@ -68,6 +70,7 @@ public class Main extends PApplet {
 
     public void mouseClicked() {
         for (int i = 0; i < iterations; i++) {
+            int time = millis();
             runCount++;
             int average = 0;
             int highScore = 0;
@@ -96,6 +99,7 @@ public class Main extends PApplet {
             setMatingPool();
             newGeneration();
             drawGraph();
+            System.out.println(millis()-time);
         }
     }
 
@@ -110,12 +114,15 @@ public class Main extends PApplet {
     }
     public void setMatingPool(){
         matingPool.clear();
+        refPool.clear();
         n = 0;
-        for (Actor actor : actors) {
-            int abomination = actor.score*actor.score/10000;
+        for (int i = 0; i < actors.size(); i++) {
+            Actor actor = actors.get(i);
+            int abomination = actor.score*actor.score/100;
             n = n + abomination;
+            refPool.add(actor.prioList);
             for (int j = 0; j < abomination; j++) {
-                matingPool.add(new ArrayList<>(actor.prioList));
+                matingPool.add(i);
             }
         }
     }
@@ -125,8 +132,8 @@ public class Main extends PApplet {
         }
     }
     public ArrayList<Integer> mergeDNA1(){
-        ArrayList<Integer> source1 = new ArrayList<Integer>(matingPool.get(parseInt(random(0,n))));
-        ArrayList<Integer> source2 = new ArrayList<Integer>(matingPool.get(parseInt(random(0,n))));
+        ArrayList<Integer> source1 = new ArrayList<Integer>(refPool.get(matingPool.get(parseInt(random(0,n)))));
+        ArrayList<Integer> source2 = new ArrayList<Integer>(refPool.get(matingPool.get(parseInt(random(0,n)))));
         ArrayList<Integer> source3 = new ArrayList<>();
         for(int i = 0; i < names.length; i++){
             if(i%2==0) {

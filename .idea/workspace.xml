@@ -59,12 +59,17 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../genetic-backpack" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="OPEN_URL_DIALOG">
+      <recent name="https://github.com/Lukires/genetic-backpack.git" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -119,7 +124,9 @@
       <workItem from="1578858830749" duration="1795000" />
       <workItem from="1578860640217" duration="12773000" />
       <workItem from="1578889524781" duration="139000" />
-      <workItem from="1578988926103" duration="6197000" />
+      <workItem from="1578988926103" duration="6870000" />
+      <workItem from="1579695874974" duration="3232000" />
+      <workItem from="1579699531624" duration="1563000" />
     </task>
     <servers />
   </component>
